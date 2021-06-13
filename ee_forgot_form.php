@@ -1,3 +1,5 @@
+
+<!-- FORGOT PASSWORD - INPUT EMAIL EMPLOYEE -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Forgot Password</title>
 
     <link href="/cms/css/bootstrap.min.css" rel="stylesheet">
 
@@ -40,6 +42,8 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+
+                                                <!-- INPUT EMAIL TO SEND RESET LINK -->
                                                 <input id="email" name="email" placeholder="email address" class="form-control" type="email">
                                             </div>
                                         </div>

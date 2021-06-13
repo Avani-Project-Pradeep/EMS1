@@ -1,3 +1,6 @@
+
+<!-- RESET PASSWORD FORM  -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +13,11 @@
 
 
 <link rel="stylesheet" href="css/er_login.css">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
-  <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+  
 </head>
 
 <body>
+
  
 <div class="container">
     <div class="login-form">
@@ -122,7 +123,7 @@ $headers .= "From:no-reply<no-reply@example.com>\r\n";
 
   $subject = "Password Reset";
 
-  //Sending mail
+  //Sending  reset success mail through mail function
   if (mail($user_email, $subject, $body, $headers)) {
 
     echo "

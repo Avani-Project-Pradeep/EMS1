@@ -20,7 +20,7 @@
 
 
 
-    
+    //FUNCTION TO CHECK WHETHER QUERY EXECUTED IS SUCCESSFUL OR THERE IS ERROR , FOR EMPLOYERS
     function check($query)
     {
         include "db_er_connection.php";
@@ -30,6 +30,10 @@
             die("query failed:" . mysqli_error($connection));
         }
     }
+
+
+        //FUNCTION TO CHECK WHETHER QUERY EXECUTED IS SUCCESSFUL OR THERE IS ERROR , FOR EMPLOYEES
+
 
     
         function checkee($query)
@@ -47,7 +51,7 @@
 
 
 
-
+//FUNCTION TO GET  LENGTH OF STRING
 
     function error_maxlength($var, $max)
     {
@@ -63,6 +67,8 @@
     }
 
 
+
+    //FUNCTION TO CHECK WHETHER STRING CONTAINS NUMBER
     function error_containdigit($var)
     {
         $containsDigit   = preg_match('/\d/', $var); //CHECKS -NUMERIC VALUE (NOT ALLOWED)
@@ -75,6 +81,9 @@
             return 0;
         }
     }
+
+
+    //FUNCTION TO VALIDATE PHONE NUMBER
 
 
     function error_phone($phone)
@@ -95,6 +104,8 @@
 
 
 
+//FUNCTION TO VALIDATE EMAIL
+
     function error_email($email)
     {
         //VALIDATE EMAIL   
@@ -112,6 +123,7 @@
     }
 
 
+    //FUNCTION TO GENERATE RANDOM PASSWORD FOR EMPLOYEE 
 
 function password_generate($chars) 
 {
@@ -119,6 +131,7 @@ function password_generate($chars)
   return substr(str_shuffle($data), 0, $chars);
 }
 
+//SHUFFLING THE STRING RANDOMLY AND GETTING THE PASSWORD OF SPECIFIED LENGTH - CHARS
 
 
 

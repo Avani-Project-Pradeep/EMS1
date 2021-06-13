@@ -11,13 +11,21 @@
 <nav >
        <div>
            <h1><img src="images/logo1.jpeg " style="width: 80px; ; height:80px;" alt="logo"></a></h1>
-
-
-
+        
        </div>
+
+
+        <?php 
+
+
+
+?>
+
+
+       <a href="viewemployer.php">About Employer</a>
+
        <h1 style="color: whitesmoke;">EMPLOYEE PORTAL </h1>
-       <!-- SOME FILES THAT ARE NEEDED IN EVERY PAGE SO INCLUDING IT IN NAV BAR -->
-       <!-- THIS HELPS IN NO MULTI DECLARATION ERROR -->
+     
        
        
       <!-- NAVIGATION OPTIONS CONTINUED ... -->

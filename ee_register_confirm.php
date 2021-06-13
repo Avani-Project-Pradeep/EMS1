@@ -1,3 +1,4 @@
+<!-- CONFIRMATION OF EMPLOYEE REGISTRATION-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +35,9 @@
   include "db_ee_connection.php";
   include "function.php";
 
-  //GETTING EMAIL FROM GET METHOD
+  //GETTING EMAIL AND NAME FROM GET METHOD
+
+  
 
   if (isset($_GET['email'])) {
     $to_email = $_GET['email'];
@@ -48,7 +51,6 @@
 
   //GENERATES PASSWORD
 $user_password=password_generate(5);
-//echo $user_password;
 
 
 //ENCRYPTING THE PASSWORD
@@ -61,7 +63,7 @@ $salt=$row['randSalt']; //fetching the value of randsalt
 
 
 
-
+//USING CRYPT FUNCTION
 
 $user_passwordcrypt=crypt($user_password,$salt);
 

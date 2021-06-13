@@ -1,3 +1,6 @@
+
+<!-- EMPLOYEE REGISTRATION -->
+
 <?php include "db_er_connection.php"; ?>
 <!-- DATABSE -->
 <?php
@@ -214,9 +217,16 @@ include "function.php";
 
         &nbsp &nbsp &nbsp &nbsp &nbsp
 
+          <br>
+          <br>
+          <br>
 
-        <input type="file" name="ee_image"> <label style="font-size: 20px; color:blue; display:inline-block">Upload Image</label>
-        <i style='font-size:24px' class='fas'>&#xf1c5;</i>
+        <input type="file" name="ee_image"> <label style="font-size: 40px; color:blue; display:inline-block">Upload Image</label>
+        <i style='font-size:34px' class='fas'>&#xf1c5;</i>
+
+        <br>
+        <br>
+        <br>
 
         <span style="color:red">
         <?php
@@ -236,14 +246,22 @@ include "function.php";
       }
   
       $ext = pathinfo($ee_image, PATHINFO_EXTENSION);
+
+      if(empty($ee_image))
+      {
+        echo "*Required field .";
+        $error1++;
+      }
+      else{
   
       if( ($ext != 'jpeg')  && ($ext!='png') &&($ext!='jpg'))
        {
   
-          echo "*Only jpeg/jpg or png is allowed   .";
+          echo "* Only jpeg/jpg or png is allowed   .";
           $error1++;
       }
     }
+  }
   ?>
 
 
@@ -292,8 +310,28 @@ include "function.php";
             $error1++;
           }
           }
-        }
-        ?>
+        
+
+        $query = "SELECT * FROM employee_registration WHERE ee_email='{$ee_email}'";
+        $select_user_query = mysqli_query($connection, $query);
+
+        if ($select_user_query) {
+
+
+
+          if (mysqli_num_rows($select_user_query) != 0) {
+
+            echo " <div class='error'>
+      <p><strong></strong> *This  email id is registered<br></p> </div> ";
+            $returnStyle3 = "#ffdddd";
+
+
+
+            $error1++;
+          }
+        }}
+       ?>
+
 
 
 
@@ -347,6 +385,17 @@ if (isset($_POST['ee_register'])) {
 
  
 
+ //SQL INJECTION
+ $ee_fname=mysqli_real_escape_string($connection,$ee_fname);
+ $ee_lname=mysqli_real_escape_string($connection,$ee_lname);
+ $ee_address=mysqli_real_escape_string($connection,$ee_address);
+ $ee_city= mysqli_real_escape_string($connection,$ee_city);
+$ee_state= mysqli_real_escape_string($connection,$ee_state);
+$ee_email= mysqli_real_escape_string($connection,$ee_email);
+$ee_phone= mysqli_real_escape_string($connection,$ee_phone);
+
+
+
 
 
 // echo $error1;
@@ -377,30 +426,18 @@ if (isset($_POST['ee_register'])) {
 
    $selectquery2 = mysqli_query($connection2, $query2);
 
+   //if error,die connection
+
    if(!$selectquery2)
    {
     die("query failed:" . mysqli_error($connection2));
 
    }
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
+   //else  print success , click to continue that will send mail of successfull registration
      else
      {
-       echo"<h1>Success</h1>";
-       echo"<a style=color:green;font-size:100px; href='ee_register_confirm.php?email=$ee_email&name=$ee_fname'>Click to Continue</a></h1>";
+       echo"<h2 style=color:green;font-size:40px;>Success</h2>";
+       echo"<a style=color:green;font-size:20px; href='ee_register_confirm.php?email=$ee_email&name=$ee_fname'>Click to Continue</a></h3>";
 
      }
   }

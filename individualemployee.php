@@ -1,3 +1,5 @@
+<!-- INDIVIDUAL EMPLOYEE PAGE BY ID -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,9 +17,12 @@
     
 <body style="background-color: honeydew;">
 <?php 
-
+//DATABASE CONNECTION
 include "db_ee_connection.php";
 $ee_id=$_GET['ee_id'];
+//GET ID BY CLICKING LINK ON MANAGE EMPLOYEES PAGE
+
+//NAVIGATION BAR
 include "managenavigation.php";
 ?>
 
@@ -39,7 +44,7 @@ include "managenavigation.php";
 
     <?php 
 
-
+//REMOVE IMAGE
 if(isset($_GET['remove_img']))
 { 
  
@@ -56,10 +61,10 @@ if(isset($_GET['remove_img']))
 
 }
 
+//UPLOAD IMAGE
 if(isset($_GET['upload']))
 {
       
-     //print_r($_FILES);
     $ee_image          =  ($_FILES['ee_img']['name']);
     $ee_image_temp     =  ($_FILES['ee_img']['tmp_name']);
     move_uploaded_file($ee_image_temp, "images/$ee_image");
@@ -83,7 +88,6 @@ if(isset($_GET['upload']))
     //CHECKING EXTENSION OF FILE
 
 
-    //print_r($_FILES);
 
     $ext = pathinfo($ee_image, PATHINFO_EXTENSION);
    
@@ -97,7 +101,7 @@ if(isset($_GET['upload']))
     if($error1==0){
 
 
-
+//IF NO ERROR, IMAGE UPDATED
     $query="UPDATE employee_personal_details SET ee_image='$ee_image' WHERE ee_id=$ee_id";
     $selectquery= mysqli_query($connection2,$query);
 
@@ -155,6 +159,8 @@ while ($row = mysqli_fetch_assoc($selectquery)) {
 <?php 
 $ee_id=$_GET['ee_id'];
 
+//JOINING TWO TABLES TO FETCH ALL THE DETAILS BY USING ID 
+
 $query="SELECT * FROM employee_personal_details INNER JOIN  employee_professional_details ON 
 employee_personal_details.ee_id = employee_professional_details.ee_id WHERE employee_personal_details.ee_id=$ee_id" ;
                 $selectquery=mysqli_query($connection2,$query);
@@ -211,7 +217,7 @@ employee_personal_details.ee_id = employee_professional_details.ee_id WHERE empl
     <div class="form-group">
 
         <br>
-
+<!-- DISPLAYING ALL DATA FROM JOINED TABLE OF INDIVIDUAL EMPLOYEE -->
         <label>E_ID</label>
         <input type='text' name="ee_id" value="<?php echo $ee_id ?>" size="15" style="font-size: 18px;">
 

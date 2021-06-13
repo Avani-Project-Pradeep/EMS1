@@ -1,3 +1,6 @@
+
+<!-- EMPLOYER FORGOT FORM - INPUT EMAIL TO GET RESET LINK -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
 
+<!-- STYLESHEET -->
     <link href="/cms/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="/cms/css/blog-home.css" rel="stylesheet">
@@ -26,17 +30,17 @@
                         <div class="panel-body">
                             <div class="text-center">
 
-
+                               
+                               <!-- HEADINGS -->
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
                                 <h2 class="text-center">Forgot Password?</h2>
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">
 
 
-
-
+                  
+                                 <!--  FORM -->
                                     <form id="register-form" role="form" autocomplete="off" class="form" action="er_reset_mail.php" method="post">
-
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
@@ -62,7 +66,6 @@
 
                                         </div>
 
-                                        <input type="hidden" class="hide" name="token" id="token" value="">
                                     </form>
 
                                 </div><!-- Body-->
@@ -79,3 +82,5 @@
 
 
     </div> <!-- /.container -->
+
+    <!-- ACTION= ER_RESET_MAIL -->

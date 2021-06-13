@@ -1,4 +1,4 @@
-
+<!-- add employee tab2  -->
 <? include "db_ee_connection.php"; ?>
 <? include "function.php" ; ?>
 
@@ -60,6 +60,7 @@ include "navbar.php"; ?>
 
  <!-- REGISTRATION FORM OF EMPLOYEE -->
 
+
  <h3 style="display:inline; margin-left:60%;"><i> <a href="http://localhost/ems/ee_register_form.php"> Register Employees</a> </i></h3>
  <br>
  <br>
@@ -73,7 +74,7 @@ include "navbar.php"; ?>
 <form action=" "  enctype="multipart/form-data" method="POST">
 
 
-
+<!-- employee image -->
 <img src="images/blank image.png" style="margin:10px; width:300px ; height:300px; overflow:hidden;border:solid green" alt="Employee Image">
 <br>
 <span>
@@ -86,7 +87,7 @@ include "navbar.php"; ?>
 
 
 <?php
-include "ee_image_action.php";
+include "ee_image_action.php"; //employee image action
 ?>
 
 
@@ -110,7 +111,6 @@ include "ee_image_action.php";
 
           if (isset($_POST['save']) || isset($_POST['update']) ) {
             $ee_fname = $_POST['ee_fname'];
-           // echo $ee_fname;
 
             if (empty($ee_fname)) {
               echo "*Required Field";
@@ -188,7 +188,7 @@ include "ee_image_action.php";
 <br>
 
 
-
+<!-- gender -->
     <label> Gender </label>
     <input type="text" name="ee_gender"  size="15" style="font-size: 18px;">
 <span style="color: red;">
@@ -213,6 +213,8 @@ include "ee_image_action.php";
 
 
    &nbsp &nbsp &nbsp
+
+   <!-- dob -->
 
     <label>  DOB </label>
     <input type="date" name="ee_dob"  style="font-size: 20px;" size="15" />
@@ -246,15 +248,14 @@ include "ee_image_action.php";
     <span style="color: red;">
       <?php
           if (isset($_POST['save']) || isset($_POST['update']) ) {
-            // echo"yes";
           $ee_email = $_POST['ee_email'];
-          //echo $ee_email;
 
           if (empty($ee_email)) {
             echo "*required field";
             $error1++;
           }
           else{
+            //valid email
            include "function.php";
           $res = error_email($ee_email);
 
@@ -276,12 +277,14 @@ include "ee_image_action.php";
     <br>
     <br>
     </div>
-
+<!-- phone number-->
     <label> Phone Number </label>
     <input type="tel" name="ee_phone" style="font-size: 18px;" size="20" />
     <label>
 <span style="color: red;">
 <?php
+
+   //valid phone number ""
           if (isset($_POST['save']) || isset($_POST['update']) ) {
 
             $ee_phone = $_POST['ee_phone'];
@@ -309,7 +312,7 @@ include "ee_image_action.php";
 
 <br>
 <div class="form-group">
-
+<!-- city -->
         <label>City</label>
         <input type='text' name="ee_city" size="15" style="font-size: 18px;">
         <span style="color: red;">
@@ -328,7 +331,7 @@ include "ee_image_action.php";
    
 
         &nbsp
-
+<!-- state -->
         <label>State</label>
         <input type="text" name="ee_state"  size="20" style="font-size: 18px;">
         <span style="color: red;">
@@ -402,6 +405,7 @@ include "ee_image_action.php";
 <br>
 <br>
 
+<!-- back to add employee page -->
 <button>
 <a href="http://localhost/ems/add_employee.php" class="previous">&laquo; Back</a>
 </button>
@@ -440,6 +444,7 @@ $ee_comp_name = $_GET['comp'];
 $ee_rep_manager = $_GET['rep'];
 $ee_shift = $_GET['shift'] ;
 $ee_status=$_GET['status'];
+$ee_employer=$_GET['employer'];
 
 if(isset($_POST['save']))
 {
@@ -491,8 +496,8 @@ if(isset($_POST['save']))
 
 
 //professional
-$querypro = "INSERT INTO employee_professional_details (ee_id, ee_designation, ee_department, ee_division, ee_type, ee_doj, ee_reporting_manager, ee_company_name, ee_shift,ee_status) 
-VALUES ($ee_id, '$ee_designation', '$ee_department', '$ee_division', '$ee_type' , '$ee_doj', '$ee_rep_manager', '$ee_comp_name', '$ee_shift','$ee_status')";  
+$querypro = "INSERT INTO employee_professional_details (ee_id, ee_designation, ee_department, ee_division, ee_type, ee_doj, ee_reporting_manager, ee_company_name, ee_shift,ee_status,ee_employer) 
+VALUES ($ee_id, '$ee_designation', '$ee_department', '$ee_division', '$ee_type' , '$ee_doj', '$ee_rep_manager', '$ee_comp_name', '$ee_shift','$ee_status','$ee_employer')";  
 
 $selectquery = mysqli_query($connection2, $querypro);  
 
@@ -576,7 +581,8 @@ if(isset($_POST['update']))
      $query.="ee_reporting_manager='{$ee_rep_manager}'," ;
      $query.="ee_company_name='{$ee_comp_name}',";
      $query.="ee_shift='{$ee_shift}',";
-     $query.="ee_status='{$ee_status}'";
+     $query.="ee_status='{$ee_status}',";
+     $query.="ee_employer='{$ee_employer}'";
      $query.="WHERE ee_id={$ee_id}";
 
 
@@ -593,7 +599,7 @@ if(isset($_POST['update']))
 
 
 
-
+/* update query employee_personal_details */
 
 
      $query2 ="UPDATE employee_personal_details SET ";
@@ -616,6 +622,7 @@ if(isset($_POST['update']))
 
 
 
+  /* update login table */
 
 
      $query3="UPDATE ee_login SET user_email='{$ee_emailp}' WHERE user_id='{$ee_id}'";

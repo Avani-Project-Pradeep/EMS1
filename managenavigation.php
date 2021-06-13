@@ -10,6 +10,7 @@
 <body>
 <nav >
        <div>
+       <!-- COMPANY LOGO -->
            <h1><img src="images/logo1.jpeg " style="width: 80px; ; height:80px;" alt="logo"></a></h1>
 
        </div>

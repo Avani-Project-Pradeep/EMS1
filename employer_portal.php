@@ -1,3 +1,9 @@
+<!-- EMPLOYER PORTAL -->
+
+
+
+<!-- SESSION STARTS AFTER LOGIN -->
+
 <?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,10 +32,14 @@
 
 <?php 
 
+/* DATABSE */
 include "db_er_connection.php";
-$email_loggedin=$_SESSION['email'];
-include "function.php";
+$email_loggedin=$_SESSION['email']; //getting logged in email
+include "function.php"; //including function file
 
+
+
+//EMPLOYER IMAGE
 if(isset($_POST['remove_img']))
 { 
  
@@ -76,7 +86,6 @@ if(isset($_POST['upload']))
     //CHECKING EXTENSION OF FILE
 
 
-    //print_r($_FILES);
 
     $ext = pathinfo($er_image, PATHINFO_EXTENSION);
    

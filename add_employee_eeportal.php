@@ -42,7 +42,7 @@
 
 /* NAVIGATION BAR */
 
-include "navbar.php"; ?>
+include "e_navbar.php"; ?>
 <ul>
 
     <li><a href="http://localhost/ems/employer_portal.php">Home</a></li>

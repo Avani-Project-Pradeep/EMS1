@@ -42,11 +42,35 @@
 
 /* NAVIGATION BAR */
 
-include "navbar.php"; ?>
+include "e_navbar.php"; ?>
 <ul>
 
+
+<li><?php
+session_start();
+$email_loggedin=$_SESSION['email'];
+
+$query = "SELECT * FROM employee_personal_details WHERE ee_email='$email_loggedin'";
+$selectquery = mysqli_query($connection2, $query);
+
+$row=mysqli_fetch_assoc($selectquery);
+
+if(!empty($row['ee_image'])){
+$ee_image=$row['ee_image'];
+
+ if (isset($ee_image) && $ee_image != '') { ?>
+  <img src="images/<?php echo $ee_image; ?>"style="width:50px; height:50px;" alt="Employee Image"><?php }
+
+ }
+
+/* ELSE BLANK IMAGE IS SHOWN */ else { ?>
+  <img src="images/blank image.png" style="width:50px; height:50px;" alt="Employee Image">
+<?php } ?>
+
+</li>
+
     <li><a href="http://localhost/ems/employee_portal.php">Home</a></li>
-    <li><a href="#">Logout</a></li>
+    <li><a href="ee_logout.php">Logout</a></li>
 </ul>
 </nav>
 <br>
@@ -90,11 +114,15 @@ include "navbar.php"; ?>
                 <label>Employee ID</label>
                 <?php global $ee_id;
                 $ee_id = $_GET['ee_id']; ?>
-                <input type='text' name="ee_id" value='<?php echo $ee_id  ?>' size="15" readonly>
+                <input type='text' name="ee_id" value='<?php echo $ee_id  ?>' readonly size="15" >
 
-                <br>
-                <br>
-                <br>
+               
+    
+
+            </span>
+
+
+
 
 
 
@@ -120,6 +148,9 @@ include "navbar.php"; ?>
 
 
 
+                 <br>
+                 <br>
+                 <br>
 
                 <label>Designation</label>
                 <input type='text' name="ee_designation" size="25" style="font-size: 18px;">
@@ -140,6 +171,10 @@ include "navbar.php"; ?>
                             if (error_maxlength($ee_designation, 50)) {
                                 $error++;
                             }
+
+
+
+
                         }
                     }
 
@@ -223,6 +258,95 @@ include "navbar.php"; ?>
 
 
 
+            <label> Work Experience: </label>
+                <input type="text" name="ee_work_exp" style="font-size: 18px;" size="80px">
+                <span style="color: red;"><?php
+                                            if (isset($_POST['next'])) {
+                                                $ee_work_exp = $_POST['ee_work_exp'];
+
+                                                if (empty($ee_work_exp)) {
+                                                    $error++;
+                                                    echo "*Field Required";
+                                                } else {
+
+
+
+                                                    if (error_maxlength($ee_work_exp, 200)) {
+                                                        $error++;
+                                                    }
+                                                }
+                                            }  ?>
+                </span>
+
+
+<br>
+
+<br>
+
+                <label> Skills: </label>
+                <input type="text" name="ee_skills" style="font-size: 18px;" size="30">
+                <span style="color: red;"><?php
+                                            if (isset($_POST['next'])) {
+                                                $ee_skills = $_POST['ee_skills'];
+
+                                                if (empty($ee_skills)) {
+                                                    $error++;
+                                                    echo "*Field Required";
+                                                } else {
+
+
+
+                                                    if (error_maxlength($ee_skills, 200)) {
+                                                        $error++;
+                                                    }
+                                                }
+                                            }  ?>
+                </span>
+
+
+<br>
+<br>
+
+<br>
+
+
+                <label> Ongoing Project Details: </label>
+                <input type="text" name="ee_project" style="font-size: 18px;" size="80">
+                <span style="color: red;"><?php
+                                            if (isset($_POST['next'])) {
+                                                $ee_project = $_POST['ee_project'];
+
+                                                if (empty($ee_project)) {
+                                                    $error++;
+                                                    echo "*Field Required";
+                                                } else {
+
+
+
+                                                    if (error_maxlength($ee_project, 500)) {
+                                                        $error++;
+                                                    }
+                                                }
+                                            }  ?>
+                </span>
+
+
+
+
+
+                <br>
+                <input type="submit" value="Next>>" style=" margin-left:1500px; width:100px ; height:40px;"  name="next" alt="next">
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -230,8 +354,8 @@ include "navbar.php"; ?>
             </div>
 
 
-
-
+          
+             
 
 
 
@@ -270,35 +394,40 @@ include "navbar.php"; ?>
                 <br>
                 <br>
 
-                <label>Company Name </label>
-                <input type="text" name="ee_comp_name" style="font-size: 18px;" size="15">
+
+
+                <?php
+  
+  include "db_er_connection.php";              
+
+$employer="SELECT ee_employer FROM employee_professional_details WHERE ee_id=$ee_id";
+
+$res=mysqli_query($connection2,$employer);
+
+
+$row=mysqli_fetch_assoc($res);
+
+$employer_email=$row['ee_employer'];
+$query="SELECT * FROM employer_personal_details  WHERE er_email='$employer_email'" ;
+
+
+$selectquery1=mysqli_query($connection,$query);
+
+while($row=mysqli_fetch_assoc($selectquery1))
+{
+       $er_fname=$row['er_firstname'];
+       $er_lname=$row['er_lastname'];
+}
+                  
+
+?>
+
+
+                <label>Employer Name </label>
+                <input type="text" value="<?php echo "$er_fname $er_lname"; ?>"  style="font-size: 18px;" size="15">
                 <span style="color: red;">
-                    <?php
-                    if (isset($_POST['next'])) {
 
-                        $ee_comp_name = $_POST['ee_comp_name'];
-
-                        if (empty($ee_comp_name)) {
-                            $error++;
-                            echo "*Field Required";
-                        } else {
-                            if (error_containdigit($ee_comp_name)) {
-                                $error++;
-                            }
-
-
-                            if (error_maxlength($ee_comp_name, 50)) {
-
-                                $error++;
-                            }
-                        }
-                    }
-
-                    ?>
-
-
-
-
+ 
                 </span>
 
 
@@ -354,34 +483,11 @@ include "navbar.php"; ?>
 
 
 
+    
 
 
 
-
-
-                <br>
-                <br>
-                <br>
-
-
-
-
-                <br>
-                <br>
-                <br>
-
-
-                <input type="submit" value="Next>>" style="font: size 25px;" name="next">
-
-
-                <br>
-                <br>
-                <br>
-
-
-                <br>
-                <br>
-                <br>
+ 
 
 
 
@@ -395,6 +501,7 @@ include "navbar.php"; ?>
 
 //WHEN ACTOR  WILL CLICK NEXT, 
 //THE DATA WILL GET POSTED AND THEN CHECK WHETHER MANDATORY  FIELD  ARE EMPTY OR NOT 
+ 
 
 
 if (isset($_POST['next'])) {
@@ -405,17 +512,20 @@ if (isset($_POST['next'])) {
         $ee_division = $_POST['ee_division'];
         $ee_type = $_POST['ee_type'];
         $ee_doj  =    $_POST['ee_doj'];
-        $ee_comp_name = $_POST['ee_comp_name'];
         $ee_rep_manager = $_POST['ee_rep_name'];
         $ee_shift = $_POST['ee_shift'];
         $ee_status = $_POST['ee_status'];
+        $ee_work_exp= $_POST['ee_work_exp'];
+        $ee_skills = $_POST['ee_skills'];
+        $ee_project = $_POST['ee_project'];
+        
 
 
 
 
         $data = array(
-            'id' => $ee_id, 'des' => $ee_designation, 'dep' => $ee_department, 'div' => $ee_division, 'type' => $ee_type, 'doj' => $ee_doj, 'comp' => $ee_comp_name, 'rep' => $ee_rep_manager, 'shift' => $ee_shift,
-            'status' => $ee_status
+            'id' => $ee_id, 'des' => $ee_designation, 'dep' => $ee_department, 'div' => $ee_division, 'type' => $ee_type, 'doj' => $ee_doj, 'rep' => $ee_rep_manager, 'shift' => $ee_shift,
+            'status' => $ee_status,'ee_work_exp'=> $ee_work_exp,'ee_skills'=>$ee_skills,'ee_project'=>$ee_project
         );
 
 

@@ -58,6 +58,7 @@ if(empty($email)&& empty($password) )
 
        $db_email= $row['user_email'];
        $db_password = $row['user_password'];
+       $db_id=$row['user_id'];
        
 
 
@@ -75,6 +76,7 @@ $cryptpassword = crypt($password, $db_password);
 
     //VALIDATING  ALL DETAILS 
 
+    
     if(($email==$db_email) && ($db_password==$cryptpassword))
     {
      
@@ -82,6 +84,7 @@ $cryptpassword = crypt($password, $db_password);
                session_start();
                 $_SESSION['email']=$db_email;
                 $_SESSION['password']=$db_password;
+                $_SESSION['id']=$db_id;
         
                 $_SESSION['last_login_timestamp'] = time();
                 
@@ -93,17 +96,15 @@ $cryptpassword = crypt($password, $db_password);
     }
  else
  {
+     header("location:ee_login_form.php");
+ }
+
  ?>
- <div class="error">
-   <p><strong>Error!</strong> Invalid Input please enter valid inputs.</p>
- </div>
- <br>
- 
- <a href="http://localhost/ems/ee_login_form.php" > Back to Login Page </a>
+
   
  
  
- <?php }}} }?>
+ <?php }}} ?>
 
  
 

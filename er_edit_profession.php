@@ -1,3 +1,6 @@
+
+<!-- EDIT PROFESSIONAL DETAILS -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +47,6 @@
   if (isset($_GET['editprof'])) {
 
     if (isset($_POST['editit'])) {
-      // print_r($_POST);
 
       //getting edit data from form
       $er_designationp = $_POST['er_designation'];

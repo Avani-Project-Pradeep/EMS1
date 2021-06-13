@@ -1,3 +1,6 @@
+
+<!-- EMPLOYER PERSONAL DETAILS -->
+
 <?php //FETCHING DETAILS FROM PERSONAL EMPLOYER TABLE
 include "db_er_connection.php";
 

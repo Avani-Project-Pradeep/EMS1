@@ -1,5 +1,7 @@
 <?php
  
+
+ //UPDATING STATUS OF EMPLOYEE
  include "db_ee_connection.php";
 if(isset($_GET['status']))
 {

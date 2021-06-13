@@ -1,3 +1,5 @@
+
+<!-- DELETE EMPLOYEE ACTION -->
 <?php
 include "db_ee_connection.php";
 include "db_er_connection.php";

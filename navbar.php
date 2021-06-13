@@ -1,3 +1,5 @@
+<!-- NAVIGATION BAR -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,18 +23,8 @@
      
      
      
-     <?php
-      /*  if(time() - $_SESSION['last_login_timestamp'] > 300) { //subtract new timestamp from the old one
-    echo"<script>alert('5 Minutes over!');</script>";
-    unset($_SESSION['email'], $_SESSION['password'], $_SESSION['timestamp']);
-    $_SESSION['logged_in'] = false;
-    header("Location:er_login_form.php " ); //redirect to index.php
-    exit;
-} else {
-    $_SESSION['timestamp'] = time(); //set new timestamp
-}
- */
-?>
+     
+
        
              
 

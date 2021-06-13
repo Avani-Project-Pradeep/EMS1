@@ -4,8 +4,11 @@
 
 <TITLE>Employer Portal</TITLE>
 </HEAD>
+<!-- database connection -->
 <?php include "db_ee_connection.php"; ?>
 <?php include "header.php" ;?>
+
+<!-- navigation bar -->
 <?php include "managenavigation.php"; ?>
 
 <body style="background-color:honeydew;">
@@ -14,17 +17,17 @@
 <input type='text' name='search'  placeholder="Search" required> 
 <br>
 <br>
-<!-- OPTIONS TO SEARCH BY NAME -->
+<!-- OPTIONS TO SEARCH BY ID OR NAME -->
 <input type='submit' name='search_id' value="Search By ID">
 <input type='submit' name='search_name' value="Search By Name">
 
 </form>
-
+<!-- SEARCH FORM ACTION  -->
 <?php include "search_employee.php"; ?>
 
 
 
-
+<!-- PAGINATION -->
 
 <div class="container">
  
@@ -152,6 +155,17 @@ else
  
  <br>
  <br>
+ 
+<h1> Contact Details </h1>
+<h2 style="color: blue;">Phone no : </h2> 
+<p style="color:black ; font-size:x-large; "?>
+<?php  echo $ee_phone ?></p>
+<h2 style="color: blue;">Email : </h2> 
+<p style="color:black ; font-size:x-large; "?>
+
+<?php  echo $ee_email ?></p>
+<br>
+ <br>
 
 
  <!-- OPTIONS TO MANAGE -->
@@ -201,82 +215,17 @@ else
 <a href="statusemployee.php?status=Inactive&ee_id=<?php echo $ee_id;?>">Change Status to Inactive</a></span>
 
 
-<br>
-<br>
-
-   
-
-
-<h1> Contact Details </h1>
-<h2 style="color: blue;">Phone no : </h2> 
-<p style="color:black ; font-size:x-large; "?>
-<?php  echo $ee_phone ?></p>
-<h2 style="color: blue;">Email : </h2> 
-<p style="color:black ; font-size:x-large; "?>
-
-<?php  echo $ee_email ?></p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <hr>
-        
-
-              <br>
-              <br>
-
-             
-
-
-
-            <?php }?>
+<br><br><hr><br><br><?php }?>
             <!-- LOOP OVER  -->
 
- 
-            </div>
-
-
-
-
-
-        
-    
-  
-       
-        
-
+ </div>
           <ul class="pager">
    
-    </li>
-    
-    </li>
-
-    <br>
-
-          </ul>
-
-  
- 
-        
-
+    </li></li>
+<br>
+</ul>
           <?php 
-            
-
-
-            
             //PAGINATION
-
    $query1="SELECT * FROM employee_personal_details ";
    $result1= mysqli_query($connection2,$query1); 
 
@@ -289,7 +238,7 @@ else
       echo"<ul class='pagination'>";
    
        if($page>1)
-       {
+       { //PREVIOUS PAGE
       echo"<li class='previous'>";
       $prev=$page-1;
      echo"<a href='/ems/manageindex.php?page={$prev}'>&larr; Older</a>";
@@ -314,7 +263,7 @@ else
            echo"<li><a style='color:{$color}' href='/ems/manageindex.php?page={$i}'> $i </a></li>";
 
        }
-
+//NEXT PAGE
        if($page<$total_pages)
        {
       echo" <li class='next'> ";

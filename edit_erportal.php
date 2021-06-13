@@ -1,4 +1,4 @@
-
+<!-- EDIT PORTAL FOR EMPLOYER -->
 <?php
 session_start();
 include "db_er_connection.php";

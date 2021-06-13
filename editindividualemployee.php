@@ -1,3 +1,6 @@
+
+<!-- EDIT INDIVIDUAL EMPLOYEE-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +19,7 @@
 <body style="background-color: honeydew;">
 <?php 
 
+//DATABASE CONNECTION
 include "db_ee_connection.php";
 $ee_id=$_GET['ee_id'];
 include "managenavigation.php";
@@ -98,7 +102,7 @@ include "ee_image_action.php";
 
 <?php 
 $ee_id=$_GET['ee_id'];
-
+//JOINING EMPLOYEE TABLES USING COMMON ID
 $query="SELECT * FROM employee_personal_details INNER JOIN  employee_professional_details ON 
 employee_personal_details.ee_id = employee_professional_details.ee_id WHERE employee_personal_details.ee_id=$ee_id" ;
                 $selectquery=mysqli_query($connection2,$query);
@@ -147,6 +151,8 @@ employee_personal_details.ee_id = employee_professional_details.ee_id WHERE empl
 <div class="container">
 <div class="col-sm-12">
 
+
+<!-- PROFESSIONAL Details -->
 <h2 style="color: green;"><u>Professional Details<u></h2>
 
 <form action=" " method="POST">
@@ -244,6 +250,8 @@ employee_personal_details.ee_id = employee_professional_details.ee_id WHERE empl
 <br>
 <br>
 <br>
+
+<!-- PERSONAL DETAILS -->
 
 <h2 style="color: green;"><u>Personal Details</u></h2>
 <form action=" " method=post>
@@ -359,7 +367,7 @@ employee_personal_details.ee_id = employee_professional_details.ee_id WHERE empl
 
 if(isset($_POST['edit']))
 {
-   //print_r($_POST);
+   
    $ee_designation = $_POST['ee_designation'];
    $ee_department = $_POST['ee_department'];
    $ee_division = $_POST['ee_division'];
@@ -369,6 +377,8 @@ if(isset($_POST['edit']))
    $ee_shift = $_POST['ee_shift'] ;
    $ee_status=$_POST['ee_status'];
 
+
+   //UPDATING DATA 
 $query= "UPDATE employee_professional_details SET ";
 $query.="ee_designation='{$ee_designation}', ";
 $query.="ee_department='{$ee_department}' ,";

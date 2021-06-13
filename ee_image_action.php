@@ -1,4 +1,6 @@
-<?php
+<!-- EMPLOYER IMAGE ACTION -->
+
+<?php //DATABASE CONNECTION
 include "db_ee_connection.php";
 include "db_er_connection.php";
 if(isset($_POST['upload']))
@@ -6,7 +8,7 @@ if(isset($_POST['upload']))
        
         
       
-    // print_r($_FILES);
+    
     $ee_image          =  ($_FILES['ee_image']['name']);
     $ee_image_temp     =  ($_FILES['ee_image']['tmp_name']);
     move_uploaded_file($ee_image_temp, "images/$ee_image");
@@ -31,7 +33,6 @@ if(isset($_POST['upload']))
     //CHECKING EXTENSION OF FILE
 
 
-    //print_r($_FILES);
 
     $ext = pathinfo($ee_image, PATHINFO_EXTENSION);
 
@@ -49,7 +50,7 @@ if(isset($_POST['upload']))
 
     if($error2==0){
 
-
+//UPDATING IMAGE IF NO ERROR
     $query="UPDATE employee_personal_details SET ee_image='$ee_image' WHERE ee_id= $ee_id";
    
     $selectquery= mysqli_query($connection2,$query);

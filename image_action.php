@@ -1,3 +1,5 @@
+<!-- IMAGE ACTION TO UPLOAD AND REMOVE IMAGE -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,13 +23,16 @@
 
 
 
-<?php 
+<?php
 
+//DATABASE CONNECTION
 include "db_er_connection.php";
 session_start();
 $email_loggedin=$_SESSION['email'];
 include "function.php";
 
+
+//REMOVE IMAGE
 if(isset($_POST['remove_img']))
 { 
  
@@ -45,7 +50,7 @@ if(isset($_POST['remove_img']))
 
 }
 
-
+//UPLOAD IMAGE
 
 if(isset($_POST['upload']))
 {

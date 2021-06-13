@@ -70,15 +70,14 @@ while ($row = mysqli_fetch_assoc($selectquery)) {
     <div class="form-group">
 
         <label>First Name </label>
-        <input type='text' name="ee_fname" value="<?php echo $ee_fname ?>" size="18" style="font-size: 18px;">
+        <input type='text' name="ee_fname" value="<?php echo $ee_fname ?>" size="20" style="font-size: 15px;">
 
 
         <label>Last Name</label>
-        <input type="text" name="ee_lname" value="<?php echo $ee_lname ?>" size="15" style="font-size: 18px;">
+        <input type="text" name="ee_lname" value="<?php echo $ee_lname ?>" size="20" style="font-size: 15px;">
 
-        &nbsp
-
-
+<br>
+<br>
 
         <label> Gender </label>
 
@@ -98,27 +97,24 @@ while ($row = mysqli_fetch_assoc($selectquery)) {
 
         <?php } ?>
 
-        <br>
-        <br>   
 
         <label>Email Id</label>
-        <input type="text" name="ee_email" value="<?php echo $ee_email?>" size="15" style="font-size: 18px;">
+        <input type="text" name="ee_email" value="<?php echo $ee_email?>" size="20" style="font-size: 15px;">
+        
         
         <br>
         <br>
-        <br>
+        
 
         <label>PAN ID</label>
-        <input type="text" name="ee_pan" value="<?php echo $ee_pan ?>" size="15" style="font-size: 18px;">
+        <input type="text" name="ee_pan" value="<?php echo $ee_pan ?>" size="10" style="font-size: 15px;">
         
-        <br>
-        <br>
-        <br>
+    
 
 
 
         <label>Aadhar ID </label>
-        <input type="text" name="ee_aadhar" value="<?php echo $ee_aadhar ?>" size="15" style="font-size: 18px;">
+        <input type="text" name="ee_aadhar" value="<?php echo $ee_aadhar ?>" size="10" style="font-size: 15px;">
 
 
         <br>
@@ -127,15 +123,12 @@ while ($row = mysqli_fetch_assoc($selectquery)) {
 
 
         <label>Contact Number</label>
-        <input type="text" name="ee_contact" value="<?php echo $ee_phone ?>" size="15" style="font-size: 18px;">
+        <input type="text" name="ee_contact" value="<?php echo $ee_phone ?>" size="10" style="font-size: 15px;">
 
         
-        <br>
-        <br>
-        <br>
 
         <label>Emergency Contact Number</label>
-        <input type="text" name="ee_emergency" value="<?php echo $ee_emergency?>" size="15" style="font-size: 18px;">
+        <input type="text" name="ee_emergency" value="<?php echo $ee_emergency?>" size="10" style="font-size: 15px;">
 
 
         
@@ -144,14 +137,13 @@ while ($row = mysqli_fetch_assoc($selectquery)) {
         <br>
 
         <label>State</label>
-        <input type="text" name="ee_state" value="<?php echo $ee_state ?>" size="20" style="font-size: 18px;">
+        <input type="text" name="ee_state" value="<?php echo $ee_state ?>" size="20" style="font-size: 15px;">
 
 
         <label>City</label>
-        <input type='text' name="ee_city" value="<?php echo $ee_city ?>" size="15" style="font-size: 18px;">
+        <input type='text' name="ee_city" value="<?php echo $ee_city ?>" size="20" style="font-size: 15px;">
 
 
-        <br>
         <br>
         <br>
 
@@ -160,16 +152,15 @@ while ($row = mysqli_fetch_assoc($selectquery)) {
 
     
         <label>Permanent Address</label>
-        <input type='textarea' style="font-size: 20px;" name="ee_permanent" value="<?php echo $ee_permanent ?>" size='40'>
+        <input type='textarea' style="font-size: 15px;" name="ee_permanent" value="<?php echo $ee_permanent ?>" size='40'>
 
         
 
         <br>
         <br>
-        <br>
 
         <label>Current Address</label>
-        <input type='textarea' style="font-size: 20px;" name="ee_current" value="<?php echo $ee_current ?>" size='40'>
+        <input type='textarea' style="font-size: 15px;" name="ee_current" value="<?php echo $ee_current ?>" size='40'>
 
 
 
@@ -179,29 +170,23 @@ while ($row = mysqli_fetch_assoc($selectquery)) {
 
        
         <label> DOB </label>
-        <input type="date" name="ee_dob" value="<?php echo $ee_dob ?>" style="font-size: 20px;" size="15" />
+        <input type="date" name="ee_dob" value="<?php echo $ee_dob ?>" style="font-size: 15px;" size="20" />
 
         
-        <br>
-        <br>
-        <br>
 
         <label>Blood type</label>
-        <input type='text' name="ee_blood" value="<?php echo $ee_blood ?>" size="15" style="font-size: 18px;">
+        <input type='text' name="ee_blood" value="<?php echo $ee_blood ?>" size="20" style="font-size: 15px;">
 
         <br>
        <br>
 
         <label>Hobbies</label>
-        <input type='text' name="ee_hobbies" value="<?php echo $ee_hobbies ?>" size="15" style="font-size: 18px;">
+        <input type='text' name="ee_hobbies" value="<?php echo $ee_hobbies ?>" size="20" style="font-size: 15px;">
        
-        <br>
-        <br>
-        <br>
 
 
         <label>Skills</label>
-        <input type='text' name="ee_city" value="<?php echo $ee_skills ?>" size="15" style="font-size: 18px;">
+        <input type='text' name="ee_city" value="<?php echo $ee_skills ?>" size="20" style="font-size: 15px;">
          
         <br>
         <br>

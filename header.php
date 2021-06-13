@@ -1,5 +1,9 @@
+
+<!-- MANAGE EMPLOYEES PAGE-->
+
+
 <!DOCTYPE html>
-<!-- HEADER PART -->
+<!-- HEADER PART FOR MANAGE EMPLOYEES PAGE -->
 <html lang="en">
 
 <head>

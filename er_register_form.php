@@ -1,8 +1,14 @@
+
+
+<!-- EMPLOYER REGISTRATION FORM-->
+
+
+<!-- DATABSE -->
+
 <?php include "db_er_connection.php"; 
            include "function.php";
            ?>
 
-<!-- DATABSE -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -135,6 +141,8 @@
         <br>
         <br>
 
+        <!-- TERMS AND CONDITIONS -->
+
         <span><label style="font-size: 20px; color:blue;  display:inline-block">Upload Terms and Conditions agreement</label> <i class='fas fa-upload' style='font-size:24px'></i> <span class="asterisk_input1"></span> <span><input type="file" name="er_tc"> </span></span>
         <span style="color:red">
           <?php
@@ -171,6 +179,10 @@
 
           <br>
 
+
+
+        
+          <!-- COMPANY DOCUMENTS -->
 
 
 
@@ -438,16 +450,17 @@ if (isset($_POST['er_register'])) {
     $email = $_POST['er_email'];
     $password = $_POST['er_password'];
     $confirm = $_POST['er_confirm_password'];
+    $city = $_POST['er_city'];
+    $state = $_POST['er_state'];
+   
 
-
+    //INSERTING FILES TO TABLES
+   
     $er_tc = $_FILES['er_tc']['name'];
     $er_tc_temp = $_FILES['er_tc']['tmp_name'];
 
 
     move_uploaded_file($er_tc, "/docs/$er_tc");
-
-
-
 
 
     $er_cd = $_FILES['er_cd']['name'];
@@ -457,17 +470,25 @@ if (isset($_POST['er_register'])) {
 
 
 
-    $city = $_POST['er_city'];
-    $state = $_POST['er_state'];
+    //SQL INJECTION
+     $comp_name=mysqli_real_escape_string($connection,$comp_name);
+     $website=mysqli_real_escape_string($connection,$website);
+     $er_phone=mysqli_real_escape_string($connection,$er_phone);
+     $email=mysqli_real_escape_string($connection,$email);
+     $password=mysqli_real_escape_string($connection,$password);
+     $confirm=mysqli_real_escape_string($connection,$confirm);
+     $state=mysqli_real_escape_string($connection,$state);
+     $city=mysqli_real_escape_string($connection,$city);
 
 
-    //IF NO ERROR THEN INSERT TO DATABASE
+
+ //IF NO ERROR THEN INSERT TO DATABASE
 
 
     if ($error1 == 0) {
 
 
-
+       //QUERY TO INSERT PROFESSIONAL DETAILS
 
       $query1 = "INSERT INTO employer_professional_details (er_email,er_company_name, er_comp_website, er_tc, er_docs) VALUES('{$email}','{$comp_name}','{$website}','{$er_tc}','{$er_cd}')";
 
@@ -482,7 +503,7 @@ if (isset($_POST['er_register'])) {
 
 
 
-      //QUERY
+      //QUERY TO INSERT PERSONAL DETAILS
 
       $query2 = "INSERT INTO employer_personal_details (er_phone,er_city, er_state, er_email)
   VALUES('{$er_phone}','{$city}','{$state}','{$email}')";

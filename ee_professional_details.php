@@ -1,3 +1,6 @@
+
+<!-- PROFESSIONAL DETAILS OF EMPLOYEE -->
+
 <?php include "db_ee_connection.php"; ?>
 <?php include "function.php" ?>
 
@@ -47,7 +50,6 @@
     $selectquery = mysqli_query($connection2, $querygetid);
 
 
-    checkee($querygetid);
 
 
     while ($row = mysqli_fetch_assoc($selectquery)) {
@@ -57,7 +59,7 @@
 
 
 
-
+//FETCHING DATA TO DISPLAY IN FORM
     $query = "SELECT * FROM employee_professional_details WHERE ee_id=$ee_id";
     $selectquery = mysqli_query($connection2, $query);
 
@@ -106,7 +108,7 @@
                 <br>
 
                 <label>E_ID</label>
-                <input type='text' name="ee_id" value="<?php echo $ee_id ?>" size="15" style="font-size: 18px;">
+                <input type='text' name="ee_id" value="<?php echo $ee_id ?>" size="15" style="font-size: 15px;">
 
 
 
@@ -128,13 +130,13 @@
 
 
                     <label>Designation</label>
-                    <input type='text' name="ee_designation" value="<?php echo $ee_designation  ?>" size="15" style="font-size: 18px;">
+                    <input type='text' name="ee_designation" value="<?php echo $ee_designation  ?>" size="20" style="font-size: 15px;">
 
 
 
 
                     <label>Department:</label>
-                    <input type="text" name="ee_department" value="<?php echo $ee_department ?>" size="10" style="font-size: 18px;">
+                    <input type="text" name="ee_department" value="<?php echo $ee_department ?>" size="20" style="font-size: 15px;">
 
 
                     <br>
@@ -145,17 +147,17 @@
 
 
                     <label>Reporting Manager</label>
-                    <input type='text' style="font-size: 20px;" name="ee_reporting_manager" value="<?php echo $ee_reporting_manager ?>" size='15'>
+                    <input type='text' style="font-size: 15px;" name="ee_reporting_manager" value="<?php echo $ee_reporting_manager ?>" size='20'>
 
 
                     <label> Company Name: </label>
-                    <input type="text" name="ee_comp_name" value="<?php echo $ee_company ?>" style="font-size: 18px;" size="15" />
+                    <input type="text" name="ee_comp_name" value="<?php echo $ee_company ?>" style="font-size:15 px;" size="15" />
                     <label>
 
 
 
                         <label> Division: </label>
-                        <input type="text" name="er_division" value="<?php echo $ee_division ?>" style="font-size:15px;" size="15">
+                        <input type="text" name="er_division" value="<?php echo $ee_division ?>" style="font-size:15px;" size="20">
 
                 </div>
 

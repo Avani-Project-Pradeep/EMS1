@@ -1,5 +1,7 @@
 <?php
 
+//LOGOUT PAGE FOR EMPLOYEE
+
 session_start(); //start the session
 session_unset(); // unset the variables stored in $_SESSION
 session_destroy(); // destroy the session that leads to logout

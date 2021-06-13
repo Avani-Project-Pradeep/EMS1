@@ -1,3 +1,5 @@
+<!-- EMPLOYER LOGIN FORM -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,26 +10,37 @@
   <title>Login</title>
 
   <link rel="stylesheet" href="css/er_login.css">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
-  <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+ 
 </head>
 
 <body>
+
+
  <!-- FORM -->
 <div class="container">
     <div class="login-form">
  <form class = "box" action =" " method = "post">
+
+<!-- HEADINGS -->
+
 <h1>Employer Login</h1>
 <p1 style="color:#ADD8E6">Please Enter Your Credentials</p1>
 
+
+<!-- COMPANY NAME -->
 <input type="text" class="input1"  placeholder =" Enter your company" name = "company" required> <span class="asterisk_input"></span>
 
+
+<!-- EMAIL -->
 <input type="text" name = "email"  placeholder =" Email" required>
+
+
+<!-- PASSWORD -->
 
 <input type="password" name = "password"  placeholder ="Password" required>
 
+
+<!-- SUBMIT -->
 <input type="submit" name="login"  value ="Login">
 <a href="er_forgot_form.php">Forgot Password? </a>
 </form>
@@ -50,15 +63,14 @@ if(isset($_POST['login'])) //IF LOGIN IS SET
   $password=$_POST['password'];
 
 
-
+//SQL INJECTION
   $company=mysqli_real_escape_string($connection,$company_name);
   $email=mysqli_real_escape_string($connection,$email);
   $password=mysqli_real_escape_string($connection,$password);
 
 
 
-
-
+//FETCHING DATA FROM E_LOGIN TABLE
   $query = "SELECT * FROM er_login WHERE user_email='{$email}'";
 $select_user_query = mysqli_query($connection, $query);
 
@@ -68,7 +80,6 @@ while ($row = mysqli_fetch_assoc($select_user_query)) {
   $db_email= $row['user_email'];
   $db_password = $row['user_password'];
 
-  //echo"$db_company,$db_email,$db_password";
 
 
 

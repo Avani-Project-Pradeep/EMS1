@@ -1,3 +1,6 @@
+
+<!-- add employee tab1 -->
+
 <?php include "db_ee_connection.php"; ?>
 
 <!-- FUNCTIONS -->
@@ -8,10 +11,10 @@
 
 
 
-<head>
-<title>Employer Portal</title>
 
-    <!-- STYLESHEETS -->
+<head>
+
+ <!-- STYLESHEETS -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +52,7 @@ include "navbar.php"; ?>
 
     <li><a href="http://localhost/ems/employer_portal.php">Home</a></li>
     <li><a href="http://localhost/ems/manageindex.php">Manage Employees</a></li>
-    <li><a href="#">Logout</a></li>
+    <li><a href="er_logout.php">Logout</a></li>
 </ul>
 </nav>
 <br>
@@ -69,6 +72,11 @@ include "navbar.php"; ?>
     <h1 style=margin-top:60px;><u> Add Employee</u> </h1>
     <br>
 
+   <?php
+    session_start();
+    $er_email=$_SESSION['email'];
+     ?>
+
 
     <!-- REGISTRATION FORM OF EMPLOYEE -->
 
@@ -76,7 +84,7 @@ include "navbar.php"; ?>
 </div>
 
 <h1 style="display:inline"> Professional Details </h1>
-
+ 
 
 <br>
 <br>
@@ -87,8 +95,12 @@ include "navbar.php"; ?>
         <div class="col-sm-6" style="background-color:honeydew; margin-left:50px">
 
 
-          
-          
+
+    <!-- to get to know the employer of the employee -->
+        <input type='hidden' name='employer' value=<?php echo $er_email ?> >       
+
+
+         <!-- employee id --> 
             <label>Employee ID</label>
             <input type='text' name="ee_id" size="15" style="font-size: 18px;">
             <span style="color: red;"> 
@@ -129,7 +141,7 @@ include "navbar.php"; ?>
             <br>
 
 
-
+<!-- designation -->
             <label>Designation</label>
             <input type='text' name="ee_designation" size="25" style="font-size: 18px;">
             <span style="color: red;">
@@ -157,6 +169,7 @@ include "navbar.php"; ?>
                 <br>
 
 
+<!-- department -->
 
                 <label> Department: </label>
                 <input type="text" name="ee_department" style="font-size: 18px;" size="15">
@@ -176,9 +189,11 @@ include "navbar.php"; ?>
 
                 <br>
                 <br>
+   
                 <br>
 
 
+<!-- division -->
                 <label> Division: </label>
                 <input type="text" name="ee_division" style="font-size: 18px;" size="15">
                 <span style="color: red;"><?php
@@ -209,7 +224,7 @@ include "navbar.php"; ?>
                 <br>
                 <br>
 
-
+<!-- employee type -->
                 <label> Employee Type </label>
                 <input type="text" name="ee_type" style="font-size: 18px;" size="15">
                 <span style="color: red;">
@@ -240,7 +255,7 @@ include "navbar.php"; ?>
 
         <div class="col-sm-4" style="background-color:honeydew;">
 
-            <label> Date of Joining: </label>
+        <!-- doj -->    <label> Date of Joining: </label>
             <input type="date" name="ee_doj" value="doj php" style="font-size: 20px;" size="15">
             <span style="color: red;" >
                     <?php
@@ -268,6 +283,7 @@ include "navbar.php"; ?>
             <br>
             <br>
             <br>
+            <!-- company name -->
 
             <label>Company Name </label>
             <input type="text" name="ee_comp_name" style="font-size: 18px;" size="15">
@@ -306,7 +322,7 @@ include "navbar.php"; ?>
             <br>
             <br>
             <br>
-
+<!-- reporting manager -->
             <label>Reporting Manager </label>
             <input type="text" name="ee_rep_name" style="font-size: 18px;" size="15">
             <span style="color: red;" >
@@ -339,6 +355,8 @@ include "navbar.php"; ?>
             <br>
             <br>
 
+            <!-- shift -->
+
             <label>Shift </label>
             <input type="text" name="ee_shift" style="font-size: 18px;" size="15">
             <span style="color: red;" >
@@ -368,7 +386,7 @@ include "navbar.php"; ?>
             <br>
             <br>
             <br>
-
+<!-- employee status -->
             <label>Employee Status </label>
             <input type="text" name="ee_status" style="font-size: 18px;" size="15">
             <span style="color: red;" >
@@ -444,19 +462,17 @@ if (isset($_POST['next'])) {
     $ee_rep_manager = $_POST['ee_rep_name'];
     $ee_shift = $_POST['ee_shift'] ;
     $ee_status=$_POST['ee_status'];
-
+    $ee_employer=$_POST['employer'];
 
 
  //CREATING DATA ARRAY TO PASS ON NEXT PAGE
     $data=array('id'=>$ee_id,'des'=>$ee_designation,'dep'=>$ee_department,'div'=>$ee_division,'type'=>$ee_type, 'doj'=>$ee_doj,'comp'=>$ee_comp_name,'rep'=>$ee_rep_manager,'shift'=>$ee_shift,
-    'status'=>$ee_status );
+    'status'=>$ee_status, 'employer'=> $ee_employer  );
 
 
 
 
-    //print_r($_POST);
 
-//echo $error;
 
 //PASSING THE ARRAY THROUGH BUILD QUERY METHOD
     echo " <div style=color:green>

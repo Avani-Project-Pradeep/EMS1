@@ -1,7 +1,4 @@
 
-<? include "db_ee_connection.php"; ?>
-<? include "function.php";
-  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +12,11 @@
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
 
     <style> body{background-color: honeydew};</style>  
@@ -36,8 +38,40 @@
 include "e_navbar.php"; ?>
 <ul>
 
+
+<li><?php
+
+
+ include "db_ee_connection.php";
+session_start();
+include "function.php";
+
+
+$email_loggedin=$_SESSION['email'];
+
+$query = "SELECT * FROM employee_personal_details WHERE ee_email='$email_loggedin'";
+$selectquery = mysqli_query($connection2, $query);
+
+
+$row=mysqli_fetch_assoc($selectquery);
+if(!empty($row['ee_image']))
+{
+$ee_image=$row['ee_image'];
+
+ if (isset($ee_image) && $ee_image != '') { ?>
+  <img src="images/<?php echo $ee_image; ?>"style="width:50px; height:50px;" alt="Employee Image"><?php }
+
+
+ }
+/* ELSE BLANK IMAGE IS SHOWN */ else { ?>
+  <img src="images/blank image.png" style="width:50px; height:50px;" alt="Employee Image">
+<?php } ?>
+
+</li>
+
+
 <li><a href="http://localhost/ems/employee_portal.php">Home</a></li>
-<li><a href="#">Logout</a></li>
+<li><a href="ee_logout.php">Logout</a></li>
 </ul>
 </nav>
 <br>
@@ -79,13 +113,15 @@ $selectquery = mysqli_query($connection2, $query);
 
 while ($row = mysqli_fetch_assoc($selectquery)) {
     
-     
+ if(!empty($row['ee_image']))
+
+ {
 
   $ee_image = $row['ee_image'];
   if(!empty($ee_image))
       {
 
-  echo "$ee_image";
+  echo "$ee_image";}
 
      }
  else {
@@ -110,9 +146,9 @@ if(isset($_POST['upload']))
 
         
       
-   // print_r($_FILES);
-    $ee_image          =  ($_FILES['upload']['name']);
-    $ee_image_temp     =  ($_FILES['upload']['tmp_name']);
+   //print_r($_FILES);
+    $ee_image          =  ($_FILES['ee_image']['name']);
+    $ee_image_temp     =  ($_FILES['ee_image']['tmp_name']);
     move_uploaded_file($ee_image_temp, "images/$ee_image");
 
 
@@ -121,7 +157,7 @@ if(isset($_POST['upload']))
 
 
     //Image file size
-    if (($_FILES['upload']["size"] > 5000000)) {
+    if (($_FILES['ee_image']["size"] > 5000000)) {
 
         echo " <div class='error'>
     <p><strong></strong>Max file size is 5MB<br></p> 
@@ -309,7 +345,7 @@ if(isset($_POST['remove']))
    &nbsp &nbsp
 
     <label>  DOB </label>
-    <input type="date" name="ee_dob"  style="font-size: 20px;" size="15" />
+    <input type="date" name="ee_dob"  style="font-size:15px;" size="15" />
 
 
 <span style="color: red;">
@@ -321,14 +357,58 @@ if(isset($_POST['remove']))
               echo "*Required Field";
             $error1++;
           } }
-
+        
   ?>
 
 </span>
 
+<br>
+<br>
+
+
+
+
+<div class="dropdown">
+  
+
+
+  <label for="bloodgrp">Blood Group:</label>
+  <select name="bloodgrp" >
+    <option value=""></option>
+    <option value="A+">A+</option>
+    <option value="A-">A-</option>
+    <option value="B+">B+</option>
+    <option value="B-">B-</option>
+    <option value="AB+">AB+</option>
+    <option value="AB-">AB-</option>
+    <option value="O+">O+</option>
+    <option value="O-">O-</option>
+    
+
+
+ 
+  </select>
+  <span style="color: red;">
+
+
+  <?php
+           
+           if (isset($_POST['save'])  ) {
+            $ee_blood = $_POST['bloodgrp'];
+
+          if (empty($ee_blood)) {
+            echo "*Required Field";
+            $error1++;
+          } 
+           }
+
+?>
+
+  </span>
 </div>
 
 
+</div>
 
 
 
@@ -351,14 +431,42 @@ if(isset($_POST['remove']))
             $error1++;
           }
           else{
-           include "function.php";
-          $res = error_email($ee_email);
+         
+            $res = error_email($ee_email);
 
           if ($res) {
 
             $error1++;
           }}
         }
+        ?>
+</span>
+<br><br><br> 
+
+<label> PAN No.</label>
+    <input type="text" name="ee_pan"  style="font-size: 18px;" size="20" />
+    <span style="color: red;">
+      <?php
+          if (isset($_POST['save'])   ) {
+            // echo"yes";
+          $ee_pan = $_POST['ee_pan'];
+          //echo $ee_pan;
+
+          if (empty($ee_pan)) {
+            echo "*required field";
+            $error1++;
+          }
+          else{
+         
+            if (!(preg_match('([a-zA-Z].*[0-9]|[0-9].*[a-zA-Z])', $ee_pan)) || strlen($ee_pan)!==10 )    {
+              echo "*Invalid PAN number";
+              $error1++;
+  
+          } 
+
+         }
+        }
+
         ?>
 
 
@@ -367,12 +475,38 @@ if(isset($_POST['remove']))
       </span>
 
 
+      <label> Aadhar ID</label>
+    <input type="text" name="ee_aadhar"  style="font-size: 18px;" size="20" />
+    <span style="color: red;">
+      <?php
+          if (isset($_POST['save'])   ) {
+            // echo"yes";
+          $ee_aadhar = $_POST['ee_aadhar'];
+          //echo $ee_aadhar;
 
-    <br>
-    <br>
-    <br>
+          if (empty($ee_aadhar)) {
+            echo "*required field";
+            $error1++;
+          }
+          else{
+         
+            if (!(preg_match('([a-zA-Z].*[0-9]|[0-9].*[a-zA-Z])', $ee_aadhar)) || strlen($ee_aadhar)!==10 )    {
+              echo "*Invalid ID";
+              $error1++;
+  
+          } 
 
-    <label> Phone Number </label>
+         }
+        }
+?>
+
+    </span>
+    <br>
+    <br>
+    <br>
+    <div class="form-group">
+
+    <label> Contact Number </label>
     <input type="tel" name="ee_phone" style="font-size: 18px;" size="20" />
     <label>
 </div>
@@ -390,7 +524,6 @@ if(isset($_POST['remove']))
 
               if (!preg_match($mobilenumber, $ee_phone)) {
 
-                $returnStyle3 = "#ffdddd";
 
                 echo"*Please enter your 10 digit phone number ";
                 $error1++;
@@ -398,10 +531,68 @@ if(isset($_POST['remove']))
             }}
         ?>
 </span>
+</div>
+<br>
+<br>
 
+
+<div class="form-group">
+
+<label> Emergency Contact Number </label>
+    <input type="tel" name="ee_emergency" style="font-size: 18px;" size="20" />
+    <label>
+</div>
+<span style="color: red;">
+<?php
+          if (isset($_POST['save'])   ) {
+
+            $ee_emergency = $_POST['ee_emergency'];
+
+            if (empty($ee_emergency)) {
+              echo "*required field";
+              $error1++;
+            } else {
+              $mobilenumber = "/^[0-9][0-9]{9}$/";
+
+              if (!preg_match($mobilenumber, $ee_emergency)) {
+
+
+                echo"*Please enter your 10 digit phone number ";
+                $error1++;
+              }
+
+              if($ee_phone==$ee_emergency)
+              {
+                echo"*Please enter different emergency number";
+                $error1++;
+
+
+              }
+            }}
+        ?>
+</span>
+</div>
 <br>
 <br>
-<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="form-group">
 
         <label>City</label>
@@ -447,6 +638,8 @@ if(isset($_POST['remove']))
 
        
         
+
+
 </div>
 <div class="form-group">
 
@@ -461,6 +654,47 @@ if(isset($_POST['remove']))
           //echo $ee_address;
 
           if (empty($ee_address)) {
+            echo "*required field";
+            $error1++;
+          }
+        }
+        ?>
+        </span>
+        <br>
+        <br>
+
+
+        <label>Current Address</label>
+        <input type='textarea' style="font-size: 18px;" name="ee_current" size='40'>
+        <span style="color: red;"> 
+        <?php
+          if (isset($_POST['save'])   ) {
+
+          $ee_current = $_POST['ee_current'];
+          //echo $ee_address;
+
+          if (empty($ee_current)) {
+            echo "*required field";
+            $error1++;
+          }
+        }
+        ?>
+        </span>
+        <br>
+        <br>
+
+
+
+        <label>Hobbies</label>
+        <input type='textarea' style="font-size: 20px;" name="ee_hobbies"  size='40'>
+        <span style="color: red;"> 
+        <?php
+          if (isset($_POST['save'])    ) {
+
+          $ee_hobbies = $_POST['ee_hobbies'];
+          //echo $ee_address;
+
+          if (empty($ee_hobbies)) {
             echo "*required field";
             $error1++;
           }
@@ -497,7 +731,8 @@ if(isset($_POST['remove']))
 <br>
 
 <button>
-<a href="http://localhost/ems/add_employee.php" class="previous">&laquo; Back</a>
+<a href="http://localhost/ems/add_eedetails.php?ee_id=<?php echo $ee_id ?>" class="previous">&laquo; Back</a>
+
 </button>
 
 
@@ -521,6 +756,7 @@ include "db_ee_connection.php";
 
 if(isset($_GET['id']))
 {
+  //print_r($_GET);
 
    $ee_id=$_GET['id'];
    $ee_designation = $_GET['des'];
@@ -529,10 +765,12 @@ $ee_department = $_GET['dep'];
 $ee_division = $_GET['div'];
 $ee_type = $_GET['type'];
 $ee_doj  =    $_GET['doj'];
-$ee_comp_name = $_GET['comp'];
 $ee_rep_manager = $_GET['rep'];
 $ee_shift = $_GET['shift'] ;
 $ee_status=$_GET['status'];
+$ee_work_exp = $_GET['ee_work_exp'];
+$ee_skills = $_GET['ee_skills'];
+$ee_project= $_GET['ee_project'];
 
 
 
@@ -540,12 +778,11 @@ $ee_status=$_GET['status'];
 
 if(isset($_POST['save']))
 {
-  //print_r($_POST);
+//print_r($_POST);
 
 
 
   if($error1==0){
-
   /* FETCHING THE DATA FROM FORM OF TAB 2 */
    $ee_emailp=$_POST['ee_email'];
    $ee_fnamep=$_POST['ee_fname'];
@@ -557,8 +794,12 @@ if(isset($_POST['save']))
    $ee_genderp=$_POST['ee_gender'];
    $ee_addressp=$_POST['ee_address'];
    $ee_educationp=$_POST['ee_educational'];
-
-
+   $ee_blood=$_POST['bloodgrp'];
+  $ee_pan=$_POST['ee_pan'];
+  $ee_aadhar=$_POST['ee_aadhar'];
+  $ee_hobbies=$_POST['ee_hobbies'];
+  $ee_current= $_POST['ee_current'];
+  $ee_emergency= $_POST['ee_emergency'];
 
 
 
@@ -584,9 +825,11 @@ if(isset($_POST['save']))
      $query.="ee_department='{$ee_department}' ,";
      $query.="ee_division='{$ee_division}',";
      $query.="ee_type='{$ee_type}',";
+     $query.="ee_work_exp='{$ee_work_exp}',";
+     $query.="ee_skills='{$ee_skills}',";
+     $query.="ee_project='{$ee_project}',";
      $query.="ee_doj='{$ee_doj}',";
      $query.="ee_reporting_manager='{$ee_rep_manager}'," ;
-     $query.="ee_company_name='{$ee_comp_name}',";
      $query.="ee_shift='{$ee_shift}',";
      $query.="ee_status='{$ee_status}'";
      $query.="WHERE ee_id={$ee_id}";
@@ -618,8 +861,16 @@ if(isset($_POST['save']))
      $query2.="ee_state='{$ee_statep}',";
      $query2.="ee_permanent='{$ee_addressp}',";
      $query2.="ee_email='{$ee_emailp}',";
+     $query2.="ee_pan='{$ee_pan}',";
+     $query2.="ee_aadhar='{$ee_aadhar}',";
+     $query2.="ee_skills='{$ee_skills}',";
+     $query2.="ee_hobbies='{$ee_hobbies}',";
+     $query2.="ee_blood='{$ee_blood}',";
+     $query2.="ee_emergency='{$ee_emergency}',";
+     $query2.="ee_current='{$ee_current}',";
      $query2.="ee_education='{$ee_educationp}'";
      $query2.="WHERE ee_id={$ee_id}";
+
 
      $selectquery2 = mysqli_query($connection2, $query2);
      if (!$selectquery2) {

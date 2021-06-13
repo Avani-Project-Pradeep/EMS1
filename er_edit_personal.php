@@ -1,3 +1,5 @@
+
+<!-- EDITING PERSONAL DETAILS OF EMPLOYER -->
 <?php
 include "db_er_connection.php";
 global $error1;
@@ -30,7 +32,7 @@ $error1 = 0;
   <?php //FETCHING DETAILS FROM PERSONAL EMPLOYER TABLE
 
 
-
+//GETTING EMAIL FROM SESSION VARIABLES
   $email_loggedin = $_SESSION['email'];
 
   $query = "SELECT * FROM employer_personal_details WHERE er_email='$email_loggedin'";
@@ -38,7 +40,7 @@ $error1 = 0;
 
 
 
-
+//FETCHING DATA OF LOGGEDIN EMAIL
   while ($row = mysqli_fetch_assoc($selectquery)) {
     $er_email = $row['er_email'];
     $er_fname = $row['er_firstname'];
@@ -78,11 +80,12 @@ $error1 = 0;
         <form action="" method=post>
           <div class="form-group">
 
+<!-- first name -->
             <label>First Name </label>
             <input type='text' name="er_fname" value="<?php echo $er_fname ?>" size="18" style="font-size: 18px;">
             <span style="color: red;">
 
-
+<!-- validation -->
               <?php if (isset($_POST['editp'])) {
 
                 include "function.php";
@@ -116,6 +119,8 @@ $error1 = 0;
 
             </span>
 
+<!-- last name -->
+<!-- validation -->
 
             <label>Last Name</label>
             <input type="text" name="er_lname" value="<?php echo $er_lname ?>" size="15" style="font-size: 18px;">
@@ -153,7 +158,7 @@ $error1 = 0;
 
             &nbsp
 
-
+<!-- date of birth -->
 
             <label> DOB </label>
             <input type="date" name="er_dob" value="<?php echo $er_dob ?>" style="font-size: 20px;" size="15" />
@@ -161,6 +166,8 @@ $error1 = 0;
           </div>
 
           <div class="form-group">
+
+          <!-- email -->
 
 
             <label> Email </label>
@@ -175,12 +182,12 @@ $error1 = 0;
             &nbsp
             <br>
             <br>
-
+<!-- phone number -->
             <label> Phone Number </label>
             <input type="tel" name="er_phone" value="<?php echo $er_phone ?>" style="font-size: 18px;" size="10" />
             <label>
               <span style="color: red;">
-
+<!-- validating -->
                 <?php global $error1;
 
                 if (isset($_POST['editp'])) {
@@ -203,20 +210,21 @@ $error1 = 0;
           </div>
 
           <div class="form-group">
-
+<!-- city -->
             <label>City</label>
             <input type='text' name="er_city" value="<?php echo $er_city ?>" size="15" style="font-size: 18px;">
-
+          
             &nbsp
 
-            <label>State</label>
+      <!-- state -->      <label>State</label>
             <input type="text" name="er_state" value="<?php echo $er_state ?>" size="20" style="font-size: 18px;">
+          
 
             &nbsp
 
             &nbsp
 
-
+<!-- gender -->
             <label> Gender </label>
 
             <?php if ($er_gender == 'male') {
@@ -236,6 +244,7 @@ $error1 = 0;
             <?php } ?>
 
           </div>
+          <!-- address -->
           <div class="form-group">
 
 
@@ -245,6 +254,8 @@ $error1 = 0;
 
             <br>
             <br>
+
+            <!-- education -->
             <label>Education</label>
             <input type='textarea' style="font-size: 20px;" name="er_educational" value="<?php echo $er_education ?>" size='40'>
 
@@ -262,7 +273,7 @@ $error1 = 0;
 </html>
 
 <?php
-
+//if click save then data gets validation and post
     if (isset($_GET['editper'])) {
       if (isset($_POST['editp'])) {
         $er_emailp = $_POST['er_email'];

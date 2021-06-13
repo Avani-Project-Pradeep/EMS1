@@ -1,3 +1,6 @@
+<!-- ACTION TO GET RESET PASSWORD LINK TO INPUT EMAIL -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password Mail</title>
 
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
-  <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
 </head>
 
+
+<!-- STYLES FOR MESSAGE -->
     <style>
 .error {
   margin-bottom: 15px;
@@ -45,6 +46,8 @@
 
 <?php
 
+
+//DATABASE CONNECTION
 include "db_er_connection.php";
 
 //WHEN FORGOT IS SET, EMAIL ID FETCH
@@ -54,6 +57,7 @@ if(isset($_POST['forgot']))
 
 
 
+    //SQL INJECTION
 
 
 
@@ -144,6 +148,8 @@ $query = "SELECT * FROM employer_personal_details WHERE er_email='{$to_email}'";
         $headers .= "From:no-reply<no-reply@example.com>\r\n";
         
 
+
+        //sending mail through mail function
 
 if (mail($to_email, $subject, $body,$headers)) 
 {
